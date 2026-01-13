@@ -170,3 +170,14 @@ th {
 tr:hover td {
   background:#0f172a;
 }
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
