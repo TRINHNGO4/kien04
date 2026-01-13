@@ -2,62 +2,87 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>OKX Dashboard</title>
+  <title>OKX Portfolio Dashboard</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- HEADER -->
 <header class="header">
-  <h1>OKX Portfolio</h1>
+  <div class="header-left">
+    <h1>OKX Portfolio</h1>
+    <span class="subtitle">Account Overview</span>
+  </div>
+
   <div class="equity-global">
     <span>Total Equity</span>
     <b id="globalEquity">--</b>
   </div>
 </header>
 
+<!-- MAIN -->
 <main class="container">
 
-  <!-- DATE FILTER -->
+  <!-- FILTER -->
   <section class="filter-bar">
-    From <input type="date" id="fromDate">
-    To <input type="date" id="toDate">
-    <button id="btnSearch">Search</button>
+    <div class="filter-group">
+      <label>From</label>
+      <input type="date" id="fromDate">
+    </div>
+
+    <div class="filter-group">
+      <label>To</label>
+      <input type="date" id="toDate">
+    </div>
+
+    <button id="btnSearch">Apply</button>
   </section>
 
   <!-- SUMMARY -->
   <section class="summary">
     <div class="box">
       <div class="label">Total Equity</div>
-      <div id="sumEquity" class="value">--</div>
+      <div id="sumEquity" class="value value-equity">--</div>
     </div>
+
     <div class="box">
       <div class="label">Deposit</div>
-      <div id="sumDeposit" class="value">--</div>
+      <div id="sumDeposit" class="value value-green">--</div>
     </div>
+
     <div class="box">
       <div class="label">Withdraw</div>
-      <div id="sumWithdraw" class="value">--</div>
+      <div id="sumWithdraw" class="value value-red">--</div>
     </div>
+
     <div class="box">
       <div class="label">PNL</div>
       <div id="sumPNL" class="value">--</div>
     </div>
   </section>
 
-  <!-- TABLES -->
+  <!-- FUTURES PNL -->
   <section class="panel">
     <h2>Futures PNL</h2>
-    <table id="pnlTable"></table>
+    <div class="table-wrap">
+      <table id="pnlTable"></table>
+    </div>
   </section>
 
+  <!-- DEPOSIT / WITHDRAW -->
   <section class="panel grid-2">
     <div>
       <h2>Deposit</h2>
-      <table id="depositTable"></table>
+      <div class="table-wrap">
+        <table id="depositTable"></table>
+      </div>
     </div>
+
     <div>
       <h2>Withdraw</h2>
-      <table id="withdrawTable"></table>
+      <div class="table-wrap">
+        <table id="withdrawTable"></table>
+      </div>
     </div>
   </section>
 
