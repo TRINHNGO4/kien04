@@ -4,18 +4,14 @@
   <meta charset="UTF-8">
   <title>OKX Portfolio Dashboard</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/favicon.png">
 </head>
 <body>
 
 <!-- HEADER -->
 <header class="header">
   <div class="header-left">
-    <img src="assets/logo.png" class="logo" alt="Logo">
-    <div>
-      <h1>OKX Portfolio</h1>
-      <span class="subtitle">Account Overview</span>
-    </div>
+    <h1>OKX Portfolio</h1>
+    <span class="subtitle">Account Overview</span>
   </div>
 
   <div class="equity-global">
@@ -64,7 +60,10 @@
       <div id="sumPNL" class="value">--</div>
     </div>
   </section>
-
+<section class="panel">
+  <h2>Monthly PNL</h2>
+  <div id="dailyGrid" class="daily-grid"></div>
+</section>
   <!-- FUTURES PNL -->
   <section class="panel">
     <h2>Futures PNL</h2>
