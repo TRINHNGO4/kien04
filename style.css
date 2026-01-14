@@ -170,14 +170,40 @@ th {
 tr:hover td {
   background:#0f172a;
 }
-.header-left {
-  display: flex;
-  align-items: center;
+
+.daily-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
   gap: 12px;
 }
 
-.logo {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
+.day-box {
+  background: #0f1424;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.day-box .day {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.day-box .amount {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.day-box.positive {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.day-box.negative {
+  border-color: var(--red);
+  color: var(--red);
 }
