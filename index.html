@@ -1,96 +1,160 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <title>OKX Portfolio Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard v11 - Trang Tổng Quan</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <div class="logo-icon">📊</div>
+          <div class="logo-text">
+            <h1>Trading Dashboard</h1>
+          </div>
+        </div>
+        <div class="version">v11</div>
+      </div>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-left">
-    <h1>OKX Portfolio</h1>
-    <span class="subtitle">Account Overview</span>
+      <!-- Filter -->
+      <div class="sidebar-section">
+        <h3>🔍 BỘ LỌC THỜI GIAN</h3>
+        <div class="filter-group">
+          <label>Từ ngày</label>
+          <input type="date" id="dateFrom" class="date-input" />
+        </div>
+        <div class="filter-group">
+          <label>Đến ngày</label>
+          <input type="date" id="dateTo" class="date-input" />
+        </div>
+        <button id="filterBtn" class="btn-filter">Áp dụng</button>
+        <button id="resetBtn" class="btn-reset">Đặt lại</button>
+      </div>
+
+      <!-- Info -->
+      <div class="sidebar-footer">
+        <div class="update-time" id="lastUpdate">Đang tải...</div>
+        <div class="rate-info">
+          <span>Tỷ giá</span>
+          <strong>1 USDT = 26,245 VND</strong>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-overview">
+          <h2 class="header-title">📊 TỔNG QUAN</h2>
+          <div class="header-stats">
+            <div class="header-stat">
+              <span class="header-stat-label">💰 Total Equity</span>
+              <strong class="header-stat-value" id="headerEquity">--</strong>
+            </div>
+            <div class="header-stat header-stat-filtered">
+              <span class="header-stat-label">📥 Total Deposit</span>
+              <strong class="header-stat-value" id="headerDeposit">Chưa lọc</strong>
+            </div>
+            <div class="header-stat header-stat-filtered">
+              <span class="header-stat-label">📤 Total Withdraw</span>
+              <strong class="header-stat-value" id="headerWithdraw">Chưa lọc</strong>
+            </div>
+            <div class="header-stat header-stat-highlight header-stat-filtered">
+              <span class="header-stat-label">📈 Total PNL</span>
+              <strong class="header-stat-value" id="headerPnl">Chưa lọc</strong>
+            </div>
+          </div>
+        </div>
+        <div class="header-right">
+          <button id="currencyToggle" class="btn-currency">
+            <span id="currencyText">💵 USDT</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="content">
+        <!-- PNL Calendar -->
+        <section class="section">
+          <div class="section-header">
+            <h2>📅 Lịch PNL</h2>
+            <p class="section-desc">Xem tổng quan lãi/lỗ theo từng ngày</p>
+          </div>
+          <div class="calendars-wrapper" id="calendarsContainer"></div>
+        </section>
+
+        <!-- Deposit & Withdraw -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <h2>💳 Lịch sử Nạp & Rút</h2>
+              <p class="section-desc" id="depositCount">--</p>
+            </div>
+            <div class="stats-pills">
+              <div class="pill pill-success">
+                <span>Nạp</span>
+                <strong id="filteredDeposit">--</strong>
+              </div>
+              <div class="pill pill-danger">
+                <span>Rút</span>
+                <strong id="filteredWithdraw">--</strong>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Thời gian</th>
+                  <th>Loại</th>
+                  <th>Coin</th>
+                  <th class="text-right">Số lượng</th>
+                  <th class="text-right" id="depositHeader">USDT</th>
+                </tr>
+              </thead>
+              <tbody id="depositTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Futures PNL -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <h2>💰 Lịch sử Futures PNL</h2>
+              <p class="section-desc" id="pnlCount">--</p>
+            </div>
+            <div class="stats-pills">
+              <div class="pill pill-info">
+                <span>Tổng PNL</span>
+                <strong id="filteredPnl">--</strong>
+              </div>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Ngày</th>
+                  <th>Cặp</th>
+                  <th class="text-right">PNL (USDT)</th>
+                  <th class="text-right" id="pnlHeader">USDT</th>
+                </tr>
+              </thead>
+              <tbody id="pnlTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
   </div>
 
-  <div class="equity-global">
-    <span>Total Equity</span>
-    <b id="globalEquity">--</b>
-  </div>
-</header>
-
-<!-- MAIN -->
-<main class="container">
-
-  <!-- FILTER -->
-  <section class="filter-bar">
-    <div class="filter-group">
-      <label>From</label>
-      <input type="date" id="fromDate">
-    </div>
-
-    <div class="filter-group">
-      <label>To</label>
-      <input type="date" id="toDate">
-    </div>
-
-    <button id="btnSearch">Apply</button>
-  </section>
-
-  <!-- SUMMARY -->
-  <section class="summary">
-    <div class="box">
-      <div class="label">Total Equity</div>
-      <div id="sumEquity" class="value value-equity">--</div>
-    </div>
-
-    <div class="box">
-      <div class="label">Deposit</div>
-      <div id="sumDeposit" class="value value-green">--</div>
-    </div>
-
-    <div class="box">
-      <div class="label">Withdraw</div>
-      <div id="sumWithdraw" class="value value-red">--</div>
-    </div>
-
-    <div class="box">
-      <div class="label">PNL</div>
-      <div id="sumPNL" class="value">--</div>
-    </div>
-  </section>
-<section class="panel">
-  <h2>Monthly PNL</h2>
-  <div id="dailyGrid" class="daily-grid"></div>
-</section>
-  <!-- FUTURES PNL -->
-  <section class="panel">
-    <h2>Futures PNL</h2>
-    <div class="table-wrap">
-      <table id="pnlTable"></table>
-    </div>
-  </section>
-
-  <!-- DEPOSIT / WITHDRAW -->
-  <section class="panel grid-2">
-    <div>
-      <h2>Deposit</h2>
-      <div class="table-wrap">
-        <table id="depositTable"></table>
-      </div>
-    </div>
-
-    <div>
-      <h2>Withdraw</h2>
-      <div class="table-wrap">
-        <table id="withdrawTable"></table>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
